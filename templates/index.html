@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-4"><img src="{% static 'images/stickynotes.jpg' %}" alt="notes" width="360" height=="250" class="shadow rounded "></div>
+        <div class="col-4"><img src="{% static 'images/stickynotes.jpg' %}" alt="notes" width="360" height=="250" class="shadow rounded "></div>
+        <div class="col-4"><img src="{% static 'images/stickynotes.jpg' %}" alt="notes" width="360" height=="250" class="shadow rounded "></div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6  offset-md-3">
+            <center><p class="h2 text-primary">Quick And Easy to Use, Anytime, Anywhere.</p></center>
+            <center><p class="h3">Plan Your Day Better, Get Your Life Organized.</p></center>
+            <center><p class="h5">Control Your Task In One Place.</p></center>
+            <center><a href="{% url "todolist" %}" class="btn btn-primary btn-lg mt-3">Let's Get Started</a></center>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Todo List Manager - TaskMate{% endblock title %}
+{% block content %}
+
+<div class="container">
+    {% if task.manage == request.user %}
+    <form class="mt-4" method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <button class="btn btn-primary" type="submit" id="button-addon1">Update</button>
+            <input type="text" class="form-control" placeholder="{{ task.task }}" name="task" value="{{ task.task }}">
+            <input type="hidden" class="form-control" name="done" value="{{ task.done }}">
+        </div>
+    </form>
+    {% else %}
+    <p>Access Restricted, You Are Not Allowed!</p>
+    {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Todo List Manager - TaskMate{% endblock title %}
+{% block content %}
+
+<div class="container">
+    {% if messages %}
+     {% for message in messages %}
+     <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+     {% endfor %}
+    {% endif %}
+    <form class="mt-4" method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <button class="btn btn-outline-primary" type="submit" id="button-addon1">+</button>
+            <input type="text" class="form-control" placeholder="new task" name="task">
+        </div>
+    </form>
+    {% if all_tasks %}
+    <div class="table-responsive">
+        <table class="table mt-4 table-bordered text-center">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">Task</th>
+                <th scope="col">Done</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for task in all_tasks %}
+                {% if task.done %}
+                <tr class="table-success">
+                    <td>{{ task }}</td>
+                    <td><a href="{% url "pending_task" task.id %}" class="btn btn-secondary" type="button">Pendding</a></td>
+                    <td><a href="{% url "edit_task" task.id %}" class="btn btn-secondary" type="button">Edit</a></td>
+                    <td><a href="{% url "delete_task" task.id %}" class="btn btn-danger" type="button">Delete</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td>{{ task }}</td>
+                    <td><a href="{% url "complete_task" task.id %}" class="btn btn-secondary" type="button">Not Completeted</a></td>
+                    <td><a href="{% url "edit_task" task.id %}" class="btn btn-secondary" type="button">Edit</a></td>
+                    <td><a href="{% url "delete_task" task.id %}" class="btn btn-danger" type="button">Delete</a></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        <p class="display-4 text-center">No Data To View</p>
+    </div>
+    {% endif %}
+
+        
+
+</div>
+
+{% endblock content %}
